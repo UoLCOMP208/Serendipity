@@ -1,4 +1,4 @@
-from flask import Blueprint, views, render_template, request, session, redirect, url_for
+from flask import Blueprint, views, render_template, request, session, redirect, url_for, g
 from .forms import LoginForm
 from .models import CMSUser
 from .decorators import login_required
@@ -12,6 +12,11 @@ bp = Blueprint('cms', __name__, url_prefix='/cms')
 def index():
     return render_template('cms/cms_index.html')
 
+@bp.route('/logout/')
+@login_required
+def logout():
+    del session[config.CMS_USER_ID]
+    return redirect(url_for('cms.login'))
 
 class LoginView(views.MethodView):
     def get(self, message=None):
@@ -35,6 +40,7 @@ class LoginView(views.MethodView):
         else:
             message = form.errors.popitem()[1][0]
             return self.get(message=message)
+
 
 
 bp.add_url_rule('/login/', view_func=LoginView.as_view('login'))
