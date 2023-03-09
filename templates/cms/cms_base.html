@@ -3,12 +3,17 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{% block title %} {% endblock %}</title>
     <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
     <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/static/cms/css/base.css">
+    <link rel="stylesheet" href="/static/common/sweetalert/sweetalert.css">
+    <script src="/static/common/sweetalert/sweetalert.min.js"></script>
+    <script src="/static/common/sweetalert/zlalert.js"></script>
     <script src="/static/cms/js/base.js"></script>
+    <script src="/static/common/zlajax.js"></script>
 
     {% block head %} {% endblock %}
 </head>
@@ -24,15 +29,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">知了课堂论坛CMS管理系统</a>
+                <a class="navbar-brand" href="#">Serendipity Content Management System</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">{{g.cms_user.username}}<span>[超级管理员]</span></a></li>
-                    <li><a href="{{url_for('cms.logout')}}">注销</a></li>
+                    <li><a href="#">{{g.cms_user.username}}<span>[Super admin]</span></a></li>
+                    <li><a href="{{url_for('cms.logout')}}">Logout</a></li>
                 </ul>
                 <form class="navbar-form navbar-right">
-                    <input type="text" class="form-control" placeholder="查找...">
+                    <input type="text" class="form-control" placeholder="Search...">
                 </form>
             </div>
         </div>
@@ -42,25 +47,25 @@
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav-sidebar">
-                    <li class="unfold"><a href="#">首页</a></li>
+                    <li class="unfold"><a href="#">Home</a></li>
                     <li class="profile-li">
-                        <a href="#">个人中心<span></span></a>
+                        <a href="#">Personal Center<span></span></a>
                         <ul class="subnav">
-                            <li><a href="{{  url_for('cms.profile') }}">个人信息</a></li>
-                            <li><a href="#">修改密码</a></li>
-                            <li><a href="#">修改邮箱</a></li>
+                            <li><a href="{{  url_for('cms.profile') }}">Personal information</a></li>
+                            <li><a href="{{ url_for('cms.resetpwd') }}">Change Password</a></li>
+                            <li><a href="#">Change Email</a></li>
                         </ul>
                     </li>
 
-                    <li class="nav-group post-manage"><a href="#">帖子管理</a></li>
-                    <li class="comments-manage"><a href="#">评论管理</a></li>
-                    <li class="board-manage"><a href="#">板块管理</a></li>
+                    <li class="nav-group post-manage"><a href="#">Post Management</a></li>
+                    <li class="comments-manage"><a href="#">Comment Management</a></li>
+                    <li class="board-manage"><a href="#">Board Management</a></li>
 
-                    <li class="nav-group user-manage"><a href="#">用户管理</a></li>
-                    <li class="role-manage"><a href="#">组管理</a></li>
+                    <li class="nav-group user-manage"><a href="#">User Management</a></li>
+                    <li class="role-manage"><a href="#">Group Management</a></li>
 
-                    <li class="nav-group cmsuser-manage"><a href="#">CMS用户管理</a></li>
-                    <li class="cmsrole-manage"><a href="#">CMS组管理</a></li>
+                    <li class="nav-group cmsuser-manage"><a href="#">CMS User Management</a></li>
+                    <li class="cmsrole-manage"><a href="#">CMS Group Management</a></li>
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

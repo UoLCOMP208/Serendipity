@@ -1,7 +1,9 @@
 from flask import Blueprint, views, render_template, request, session, redirect, url_for, g
-from .forms import LoginForm
+from .forms import LoginForm, ResetpwdForm
 from .models import CMSUser
 from .decorators import login_required
+from exts import db
+from utils import restful
 import config
 
 bp = Blueprint('cms', __name__, url_prefix='/cms')
@@ -12,16 +14,19 @@ bp = Blueprint('cms', __name__, url_prefix='/cms')
 def index():
     return render_template('cms/cms_index.html')
 
+
 @bp.route('/logout/')
 @login_required
 def logout():
     del session[config.CMS_USER_ID]
     return redirect(url_for('cms.login'))
 
+
 @bp.route('/profile/')
 @login_required
 def profile():
     return render_template('cms/cms_profile.html')
+
 
 class LoginView(views.MethodView):
     def get(self, message=None):
@@ -47,5 +52,29 @@ class LoginView(views.MethodView):
             return self.get(message=message)
 
 
+class ResetPwdView(views.MethodView):
+    decorators = [login_required]
+
+    def get(self):
+        return render_template('cms/cms_resetpwd.html')
+
+    def post(self):
+        form = ResetpwdForm(request.form)
+        if form.validate():
+            oldpwd = form.oldpwd.data
+            newpwd = form.newpwd.data
+            user = g.cms_user
+            if user.check_password(oldpwd):
+                user.password = newpwd
+                db.session.commit()
+                # {"code":200,message=""}
+                # return jsonify({"code":200,"message":""})
+                return restful.success()
+            else:
+                return restful.params_error("Incorrect old password")
+        else:
+            return restful.params_error(form.get_error())
+
 
 bp.add_url_rule('/login/', view_func=LoginView.as_view('login'))
+bp.add_url_rule('/resetpwd/', view_func=ResetPwdView.as_view('resetpwd'))
