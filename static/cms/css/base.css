@@ -198,3 +198,7 @@ body {
     background: #ecedf0;
     overflow: hidden;
 }
+
+.form-container{
+    width: 400px;
+}

@@ -1,10 +1,13 @@
 from flask import Blueprint, views, render_template, request, session, redirect, url_for, g
-from .forms import LoginForm, ResetpwdForm
+from .forms import LoginForm, ResetpwdForm, ResetEmailForm
 from .models import CMSUser
 from .decorators import login_required
-from exts import db
-from utils import restful
+from exts import db, mail
+from utils import restful, zlcache
+from flask_mail import Message
 import config
+import string
+import random
 
 bp = Blueprint('cms', __name__, url_prefix='/cms')
 
@@ -26,6 +29,26 @@ def logout():
 @login_required
 def profile():
     return render_template('cms/cms_profile.html')
+
+
+@bp.route('/email_captcha/')
+def email_captcha():
+    # /email_capthca/?email=xxx@qq.com
+    email = request.args.get('email')
+    if not email:
+        return restful.params_error('Please enter email!')
+
+    source = list(string.ascii_letters)
+    source.extend(map(lambda x: str(x), range(0, 10)))
+    captcha = "".join(random.sample(source, 6))
+
+    message = Message('Serendipity Forum Email Captcha', recipients=[email], body='Your email captcha is: %s' % captcha)
+    try:
+        mail.send(message)
+    except:
+        return restful.server_error()
+    zlcache.set(email, captcha)
+    return restful.success()
 
 
 class LoginView(views.MethodView):
@@ -76,5 +99,23 @@ class ResetPwdView(views.MethodView):
             return restful.params_error(form.get_error())
 
 
+class ResetEmailView(views.MethodView):
+    decorators = [login_required]
+
+    def get(self):
+        return render_template('cms/cms_resetemail.html')
+
+    def post(self):
+        form = ResetEmailForm(request.form)
+        if form.validate():
+            email = form.email.data
+            g.cms_user.email = email
+            db.session.commit()
+            return restful.success()
+        else:
+            return restful.params_error(form.get_error())
+
+
 bp.add_url_rule('/login/', view_func=LoginView.as_view('login'))
 bp.add_url_rule('/resetpwd/', view_func=ResetPwdView.as_view('resetpwd'))
+bp.add_url_rule('/resetemail/', view_func=ResetEmailView.as_view('resetemail'))

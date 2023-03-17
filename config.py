@@ -19,3 +19,12 @@ SQLALCHEMY_DATABASE_URI = DB_URI
 
 
 CMS_USER_ID = 'ASDNJFKMML'
+
+
+MAIL_SERVER = "smtp.gmail.com"
+MAIL_USE_SSL = False
+MAIL_USE_TLS = True
+MAIL_PORT = 587
+MAIL_USERNAME = "xinchi.shi20@gmail.com"
+MAIL_PASSWORD = "smzewsthweshmacs"
+MAIL_DEFAULT_SENDER = "xinchi.shi20@gmail.com"
