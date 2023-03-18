@@ -29,15 +29,18 @@ def create_cms_user(username, password, email):
 @manager.command
 def create_role():
     # 1. Visitors (can change personal information)
-    visitor = CMSRole(name='visitor', desc='can only change personal information')
+    visitor = CMSRole(
+        name='visitor', desc='can only change personal information')
     visitor.permissions = CMSPermission.VISITOR
 
     # 2. Operation roles (modify personal information, manage posts, manage comments, manage front desk users)
-    operator = CMSRole(name='operation_specialist', desc='Manage posts, manage comments, manage front desk users')
+    operator = CMSRole(name='operation_specialist',
+                       desc='Manage posts, manage comments, manage front desk users')
     operator.permissions = CMSPermission.VISITOR | CMSPermission.POSTER | CMSPermission.CMSUSER | CMSPermission.COMMENTER | CMSPermission.FRONTUSER
 
-    # 3. Administrators (with most of the privileges)
-    admin = CMSRole(name='administrator', desc='Have all permissions for this system')
+    # 3. Administrators (with most of the permissions)
+    admin = CMSRole(name='administrator',
+                    desc='Have all permissions for this system')
     admin.permissions = CMSPermission.VISITOR | CMSPermission.POSTER | CMSPermission.CMSUSER | CMSPermission.COMMENTER | CMSPermission.FRONTUSER | CMSPermission.BOARDER
 
     # 4. Developer (all permissions)
@@ -46,6 +49,31 @@ def create_role():
 
     db.session.add_all([visitor, operator, admin, developer])
     db.session.commit()
+
+
+@manager.option('-e', '--email', dest='email')
+@manager.option('-n', '--name', dest='name')
+def add_user_to_role(email, name):
+    user = CMSUser.query.filter_by(email=email).first()
+    if user:
+        role = CMSRole.query.filter_by(name=name).first()
+        if role:
+            role.users.append(user)
+            db.session.commit()
+            print('User added to role successfully')
+        else:
+            print('No such role: %s' % role)
+    else:
+        print('%smailbox does not have this user' % email)
+
+
+@manager.command
+def test_permission():
+    user = CMSUser.query.first()
+    if user.is_developer:
+        print('This user has visitor rights')
+    else:
+        print('This user has no visitor rights')
 
 
 if __name__ == '__main__':
