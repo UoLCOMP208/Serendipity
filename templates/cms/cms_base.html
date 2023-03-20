@@ -59,27 +59,27 @@
 
                     {% set cms_user = g.cms_user %}
                     {% if cms_user.has_permission(CMSPermission.POSTER) %}
-                        <li class="nav-group post-manage"><a href="#">Post Management</a></li>
+                        <li class="nav-group post-manage"><a href="{{ url_for('cms.posts') }}">Post Management</a></li>
                     {% endif %}
 
                     {% if cms_user.has_permission(CMSPermission.BOARDER) %}
-                        <li class="comments-manage"><a href="#">Comment Management</a></l>
+                        <li class="comments-manage"><a href="{{ url_for('cms.comments') }}">Comment Management</a></l>
                     {% endif %}
 
                     {% if cms_user.has_permission(CMSPermission.BOARDER) %}
-                    <li class="board-manage"><a href="#">Board Management</a></li>
+                    <li class="board-manage"><a href="{{ url_for('cms.boards') }}">Board Management</a></li>
                     {% endif %}
 
                     {% if cms_user.has_permission(CMSPermission.FRONTUSER) %}
-                        <li class="nav-group user-manage"><a href="#">Front-end User Management</a></li>
+                        <li class="nav-group user-manage"><a href="{{ url_for('cms.fusers') }}">Front-end User Management</a></li>
                     {% endif %}
 
                     {% if cms_user.has_permission(CMSPermission.CMSUSER) %}
-                        <li class="nav-group cmsuser-manage"><a href="#">CMS User Management</a></li>
+                        <li class="nav-group cmsuser-manage"><a href="{{ url_for('cms.cusers') }}">CMS User Management</a></li>
                     {% endif %}
 
                     {% if cms_user.is_developer %}
-                        <li class="cmsrole-manage"><a href="#">CMS Group Management</a></li>
+                        <li class="cmsrole-manage"><a href="{{ url_for('cms.croles') }}">CMS Group Management</a></li>
                     {% endif %}
                 </ul>
             </div>

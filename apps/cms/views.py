@@ -1,7 +1,7 @@
 from flask import Blueprint, views, render_template, request, session, redirect, url_for, g
 from .forms import LoginForm, ResetpwdForm, ResetEmailForm
-from .models import CMSUser
-from .decorators import login_required
+from .models import CMSUser, CMSPersmission
+from .decorators import login_required, permission_required
 from exts import db, mail
 from utils import restful, zlcache
 from flask_mail import Message
@@ -49,6 +49,42 @@ def email_captcha():
         return restful.server_error()
     zlcache.set(email, captcha)
     return restful.success()
+
+@bp.route('/posts/')
+@login_required
+@permission_required(CMSPersmission.POSTER)
+def posts():
+    return render_template('cms/cms_posts.html')
+
+@bp.route('/comments/')
+@login_required
+@permission_required(CMSPersmission.COMMENTER)
+def comments():
+    return render_template('cms/cms_comments.html')
+
+@bp.route('/boards/')
+@login_required
+@permission_required(CMSPersmission.BOARDER)
+def boards():
+    return render_template('cms/cms_boards.html')
+
+@bp.route('/fusers/')
+@login_required
+@permission_required(CMSPersmission.FRONTUSER)
+def fusers():
+    return render_template('cms/cms_fusers.html')
+
+@bp.route('/cusers/')
+@login_required
+@permission_required(CMSPersmission.CMSUSER)
+def cusers():
+    return render_template('cms/cms_cusers.html')
+
+@bp.route('/croles/')
+@login_required
+@permission_required(CMSPersmission.ALL_PERMISSION)
+def croles():
+    return render_template('cms/cms_croles.html')
 
 
 class LoginView(views.MethodView):
