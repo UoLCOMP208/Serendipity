@@ -3,10 +3,13 @@ from flask_migrate import Migrate, MigrateCommand
 from serendipity import create_app
 from exts import db
 from apps.cms import models as cms_models
+from apps.front import models as front_models
 
 CMSUser = cms_models.CMSUser
 CMSRole = cms_models.CMSRole
 CMSPermission = cms_models.CMSPersmission
+
+FrontUser = front_models.FrontUser
 
 app = create_app()
 
@@ -66,6 +69,13 @@ def add_user_to_role(email, name):
     else:
         print('%smailbox does not have this user' % email)
 
+
+@manager.option('-u','--username',dest='username')
+@manager.option('-p','--password',dest='password')
+def create_front_user(username,password):
+    user = FrontUser(username=username,password=password)
+    db.session.add(user)
+    db.session.commit()
 
 @manager.command
 def test_permission():
