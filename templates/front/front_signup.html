@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Serendipity Forum Register</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+    <!-- MDB -->
+    <link rel="stylesheet" href="/static/front/css/mdb.min.css" />
+    <!-- register -->
+    <link rel="stylesheet" href="/static/front/css/signup.css" />
+    <script Language="JavaScript" src="/static/front/jquery/jquery.3.6.min.js"></script>
+    <script Language="JavaScript" src="/static/front/js/signup.js"></script>
+</head>
+
+<body>
+    <div class="login-box">
+        <h2>Register Forum</h2>
+        <form method="POST">
+            <div class="user-box">
+                <input type="email" name="email" required="">
+                <label>Email</label>
+            </div>
+            <div class="user-box">
+                <input type="text" name="captcha" required="">
+                <label>Verification Code</label>
+                <div class="button-position">
+                    <button class="custom-btn btn-11" id="captcha-btn">Get code</button>
+                </div>
+            </div>
+
+            <div class="user-box">
+                <input type="text" name="username" required="">
+                <label>Username</label>
+            </div>
+            <div class="user-box">
+                <input type="password" name="password" required="">
+                <label>Password</label>
+            </div>
+            <a href="#">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <button type="submit" , class="submit-btn">Submit</button>
+                <!-- Submit -->
+            </a>
+        </form>
+    </div>
+</body>
+
+</html>
