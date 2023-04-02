@@ -9,7 +9,7 @@ var zlalert = {
             - msg：提示的内容（可选）
     */
     'alertError': function (msg) {
-        swal('提示',msg,'error');
+        swal('Notice',msg,'error');
     },
     /*
         功能：信息提示
@@ -17,7 +17,7 @@ var zlalert = {
             - msg：提示的内容（可选）
     */
     'alertInfo':function (msg) {
-        swal('提示',msg,'warning');
+        swal('Notice',msg,'warning');
     },
     /*
         功能：可以自定义标题的信息提示
@@ -35,7 +35,7 @@ var zlalert = {
     */
     'alertSuccess':function (msg,confirmCallback) {
         args = {
-            'title': '提示',
+            'title': 'Notice',
             'text': msg,
             'type': 'success',
         }
@@ -63,12 +63,12 @@ var zlalert = {
     */
     'alertConfirm':function (params) {
         swal({
-            'title': params['title'] ? params['title'] : '提示',
+            'title': params['title'] ? params['title'] : 'Notice',
             'showCancelButton': true,
             'showConfirmButton': true,
             'type': params['type'] ? params['type'] : '',
-            'confirmButtonText': params['confirmText'] ? params['confirmText'] : '确定',
-            'cancelButtonText': params['cancelText'] ? params['cancelText'] : '取消',
+            'confirmButtonText': params['confirmText'] ? params['confirmText'] : 'Confirm',
+            'cancelButtonText': params['cancelText'] ? params['cancelText'] : 'Cancel',
             'text': params['msg'] ? params['msg'] : ''
         },function (isConfirm) {
             if(isConfirm){
@@ -94,7 +94,7 @@ var zlalert = {
     */
     'alertOneInput': function (params) {
         swal({
-            'title': params['title'] ? params['title'] : '请输入',
+            'title': params['title'] ? params['title'] : 'Please input',
             'text': params['text'] ? params['text'] : '',
             'type':'input',
             'showCancelButton': true,
@@ -102,12 +102,12 @@ var zlalert = {
             'closeOnConfirm': false,
             'showLoaderOnConfirm': true,
             'inputPlaceholder': params['placeholder'] ? params['placeholder'] : '',
-            'confirmButtonText': params['confirmText'] ? params['confirmText'] : '确定',
-            'cancelButtonText': params['cancelText'] ? params['cancelText'] : '取消',
+            'confirmButtonText': params['confirmText'] ? params['confirmText'] : 'Confirm',
+            'cancelButtonText': params['cancelText'] ? params['cancelText'] : 'Cancel',
         },function (inputValue) {
             if(inputValue === false) return false;
             if(inputValue === ''){
-                swal.showInputError('输入框不能为空！');
+                swal.showInputError('You need to write something!');
                 return false;
             }
             if(params['confirmCallback']){
@@ -120,7 +120,7 @@ var zlalert = {
         参数：无
     */
     'alertNetworkError':function () {
-        this.alertErrorToast('网络错误');
+        this.alertErrorToast('Network error!');
     },
     /*
         功能：信息toast提示（1s后消失）
@@ -144,7 +144,7 @@ var zlalert = {
             - msg：提示消息
     */
     'alertSuccessToast':function (msg) {
-        if(!msg){msg = '成功！';}
+        if(!msg){msg = 'Success!';}
         this.alertToast(msg,'success');
     },
     /*

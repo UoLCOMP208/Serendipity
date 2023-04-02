@@ -7,20 +7,25 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>Serendipity Forum Register</title>
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" /> -->
     <!-- Google Fonts Roboto -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
     <!-- MDB -->
-    <link rel="stylesheet" href="/static/front/css/mdb.min.css" />
+    <!-- <link rel="stylesheet" href="/static/front/css/mdb.min.css" /> -->
+    <!-- alert -->
+    <link rel="stylesheet" href="/static/common/sweetalert/sweetalert.css">
+    <script src="/static/common/sweetalert/sweetalert.min.js"></script>
+    <script src="/static/common/sweetalert/zlalert.js"></script>
+    <script src="/static/common/zlajax.js"></script>
     <!-- register -->
-    <link rel="stylesheet" href="/static/front/css/signup.css" />
+    <link rel="stylesheet" href="/static/front/css/signbase.css" />
     <script Language="JavaScript" src="/static/front/jquery/jquery.3.6.min.js"></script>
     <script Language="JavaScript" src="/static/front/js/signup.js"></script>
 </head>
 
 <body>
-    <div class="login-box">
+    <!-- <div class="login-box">
         <h2>Register Forum</h2>
         <form method="POST">
             <div class="user-box">
@@ -48,9 +53,30 @@
                 <span></span>
                 <span></span>
                 <span></span>
-                <button type="submit" , class="submit-btn">Submit</button>
-                <!-- Submit -->
+                <span style="display:none;" id="return-to-span">{{  return_to  }}</span>
+                <button type="submit", class="submit-btn" id="submit-btn">Submit</button>
             </a>
+        </form>
+    </div> -->
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <div class="login">
+        <h2 class="active"> sign up </h2>
+        <form>
+            <input type="email" class="text" name="email">
+            <span>Email</span>
+            <input type="text" class="text" name="captcha">
+            <span>Verification Code</span>
+            <div class="login-sms-wp__vertical-line"></div>
+            <div class="login-sms-send" id="captcha-btn">
+                Get code
+            </div>
+            <input type="text" class="text" name="username" id="username">
+            <span class="username">username</span>
+            <input type="password" class="text" name="password" id="password">
+            <span class="password">password</span>
+            <button class="signin">
+                Sign Up
+            </button>
         </form>
     </div>
 </body>
