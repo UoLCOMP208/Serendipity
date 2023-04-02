@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Serendipity Forum Login</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+    <!-- MDB -->
+    <link rel="stylesheet" href="/static/front/css/mdb.min.css" />
+    <!-- alert -->
+    <link rel="stylesheet" href="/static/common/sweetalert/sweetalert.css">
+    <script src="/static/common/sweetalert/sweetalert.min.js"></script>
+    <script src="/static/common/sweetalert/zlalert.js"></script>
+    <script src="/static/common/zlajax.js"></script>
+    <!-- indexs -->
+    <link rel="stylesheet" href="/static/front/css/front_index.css" />
+</head>
+
+<body>
+    <!-- Start your project here-->
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
+                aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarExample01">
+                <a class="navbar-brand mt-2 mt-lg-0" href="/" style="margin-left: 100px; margin-right: 100px;">
+                    <img src="/static/avatar.png" height="30" alt="MDB Logo" loading="lazy" />
+                </a>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item" style="align-self: center;">
+                        <i class="fas fa-home"></i>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" aria-current="page" href="/">Home</a>
+                    </li>
+
+                    <li class="nav-item" style="align-self: center; margin-left: 8em;">
+                        <i class="fas fa-edit"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Posts</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav me-5 mb-2 mb-lg-0">
+                    <li class="nav-item" style="align-self: center;">
+                        <i class="fas fa-user-circle"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('front.signin')}}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('front.signup')}}">Register</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- body -->
+    <div class="text">
+        <h1>Welcome</h1>
+    </div>
+
+    <h2>
+        <a class="button rollover" style="text-decoration: none; margin-top: 100px;"
+            href="{{url_for('front.user_guide')}}">
+            <span class="roll-text">Getting Started</span>
+            <span class="roll-text">Let's Go</span>
+        </a>
+    </h2>
+
+
+    <!-- footer -->
+    <footer class="bg-light text-center text-lg-start fixed-bottom">
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color:rgba(0, 0, 0, 0.05);">
+            © Serendipity 2023 Copyright: Group3
+            <a class="btn text-white btn-floating btn-sm" style="background-color: #333333; margin-left: 10px;"
+                href="https://github.com/UoLCOMP208/Student-social-forum-Serendipity-" role="button">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+
+    <style>
+        .button {
+            background-color: transparent;
+            border: 2px solid #86a7ca;
+            border-radius: 5px;
+            display: inline-block;
+            color: #86a7ca;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 400;
+            height: 40px;
+            line-height: 40px;
+            letter-spacing: 1px;
+            margin: 5px;
+            overflow: hidden;
+            padding: 0 22px;
+            text-align: center;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .button:hover {
+            background-color: #86a7ca;
+        }
+
+        .roll-text {
+            display: block;
+            position: relative;
+            transition: all 420ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .roll-text:last-child {
+            color: #fff;
+        }
+
+        .rollover:hover .roll-text:first-child {
+            margin-top: -38px;
+        }
+    </style>
+
+    <!-- End your project here-->
+
+    <!-- MDB -->
+    <script type="text/javascript" src="../static/js/mdb.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript"></script>
+</body>
+
+</html>

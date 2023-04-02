@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Serendipity Forum User Guide</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+    <!-- MDB -->
+    <link rel="stylesheet" href="/static/front/css/mdb.min.css" />
+    <!-- alert -->
+    <link rel="stylesheet" href="/static/common/sweetalert/sweetalert.css">
+    <script src="/static/common/sweetalert/sweetalert.min.js"></script>
+    <script src="/static/common/sweetalert/zlalert.js"></script>
+    <script src="/static/common/zlajax.js"></script>
+    <!-- User Guide -->
+    <link rel="stylesheet" href="/static/front/css/front_userguide.css" />
+</head>
+
+<body>
+    <!-- Start your project here-->
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,400italic,700' rel='stylesheet' type='text/css'>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
+                aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarExample01">
+                <a class="navbar-brand mt-2 mt-lg-0" href="/" style="margin-left: 100px; margin-right: 100px;">
+                    <img src="/static/avatar.png" height="30" alt="MDB Logo" loading="lazy" />
+                </a>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item" style="align-self: center;">
+                        <i class="fas fa-home"></i>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" aria-current="page" href="/">Home</a>
+                    </li>
+
+                    <li class="nav-item" style="align-self: center; margin-left: 8em;">
+                        <i class="fas fa-edit"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Posts</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav me-5 mb-2 mb-lg-0">
+                    <li class="nav-item" style="align-self: center;">
+                        <i class="fas fa-user-circle"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('front.signin')}}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('front.signup')}}">Register</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- body -->
+    <div class="container">
+        <section class="landing-section">
+            <div class="text">
+                <h1 style="font-size: 45pt">Getting Started</h1>
+            </div>
+            <nav class="landing-section-grid mod-3">
+                <div>
+                    <a class="icon-link" href="/">
+                        <img class="icon-link-img" src="https://s1.ax1x.com/2022/05/04/OE16UK.png"
+                            alt="LiveWhale Calendar User Guide" />
+                        <div class="icon-link-text">
+                            <h3 class="icon-link-title">Publish Posts</h3>
+                            <p class="icon-link-summary">Click “POST SOMETHING!” on the posts list page. Type something
+                                in the box and submit it.</p>
+                        </div>
+                    </a>
+                </div>
+                <div>
+                    <a class="icon-link">
+                        <img class="icon-link-img" src="https://s1.ax1x.com/2022/05/04/OE1DD1.png"
+                            alt="LiveWhale Calendar User Guide" />
+
+                        <div class="icon-link-text">
+                            <h3 class="icon-link-title">Search and See Posts</h3>
+                            <p class="icon-link-summary">In homepage, you can enter keywords in the search bar to find
+                                relevant posts.</p>
+                        </div>
+                    </a>
+                </div>
+                <div>
+                    <a class="icon-link">
+                        <img class="icon-link-img" src="https://s1.ax1x.com/2022/05/04/OE1BuR.png"
+                            alt="LiveWhale Calendar User Guide" />
+                        <div class="icon-link-text">
+                            <h3 class="icon-link-title">Like Posts</h3>
+                            <p class="icon-link-summary">If you want to like a post, click the heart on the
+                                corresponding post.</p>
+                        </div>
+                    </a>
+                </div>
+            </nav>
+            <nav class="landing-section-grid mod-3">
+                <div>
+                    <a class="icon-link">
+                        <img class="icon-link-img" src="https://s1.ax1x.com/2022/05/04/OE1yE6.png"
+                            alt="LiveWhale Calendar User Guide" />
+                        <div class="icon-link-text">
+                            <h3 class="icon-link-title">User Information</h3>
+                            <p class="icon-link-summary">Click the username in post detail page, you can see the user's
+                                information page. You can also access MyInfo page to customize your personal
+                                information.</p>
+                        </div>
+                    </a>
+                </div>
+                <div>
+                    <a class="icon-link" href="{{url_for('front.signin')}}">
+                        <img class="icon-link-img" src="https://s1.ax1x.com/2022/05/04/OE1c4O.png"
+                            alt="LiveWhale Calendar User Guide" />
+                        <div class="icon-link-text">
+                            <h3 class="icon-link-title">Login or Register</h3>
+                            <p class="icon-link-summary">Click the “Login” on the navigation bar, fill in the form and
+                                login to Serendipity. If you don't have an account, click “Register” at its right.
+                            </p>
+                        </div>
+                    </a>
+                </div>
+                <div>
+                    <a class="icon-link">
+                        <img class="icon-link-img" src="https://s1.ax1x.com/2022/05/21/Oj1vEF.png"
+                            alt="LiveWhale Calendar User Guide" />
+                        <div class="icon-link-text">
+                            <h3 class="icon-link-title">Management System</h3>
+                            <p class="icon-link-summary">Only for super admins. Forum admins can manage user information
+                                and post information here.</p>
+                        </div>
+                    </a>
+                </div>
+            </nav>
+        </section>
+    </div>
+
+    <!-- footer -->
+    <footer class="bg-light text-center text-lg-start fixed-bottom">
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color:rgba(0, 0, 0, 0.05);">
+            © Serendipity 2023 Copyright: Group3
+            <a class="btn text-white btn-floating btn-sm" style="background-color: #333333; margin-left: 10px;"
+                href="https://github.com/UoLCOMP208/Student-social-forum-Serendipity-" role="button">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+
+    <!-- End your project here-->
+
+    <!-- MDB -->
+    <script type="text/javascript" src="../static/js/mdb.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript"></script>
+</body>
+
+</html>

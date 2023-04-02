@@ -13,7 +13,11 @@ bp = Blueprint('front', __name__)
 
 @bp.route('/')
 def index():
-    return 'front index'
+    return render_template('front/front_index.html')
+
+@bp.route("/user_guide")
+def user_guide():
+    return render_template("front/front_userguide.html")
 
 
 class SignupView(views.MethodView):
