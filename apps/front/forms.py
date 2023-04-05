@@ -1,6 +1,6 @@
 import wtforms
 from ..forms import BaseForm
-from wtforms.validators import Email, Length, Regexp
+from wtforms.validators import Length, InputRequired
 from wtforms import ValidationError
 from utils import zlcache
 
@@ -32,3 +32,8 @@ class SigninForm(BaseForm):
                                 [wtforms.validators.Regexp('.*@liverpool.ac.uk$', message='Email must be from liverpool.ac.uk domain')])
     password = wtforms.StringField(validators=[Length(min=6, max=20, message="Incorrect password format!")])
     remember = wtforms.StringField()
+
+class AddPostForm(BaseForm):
+    title = wtforms.StringField(validators=[InputRequired(message='Please enter title!')])
+    content = wtforms.StringField(validators=[InputRequired(message='Please enter content!')])
+    board_id = wtforms.IntegerField(validators=[InputRequired(message='Please enter board id!')])

@@ -56,12 +56,21 @@
                     <li class="nav-item" style="align-self: center;">
                         <i class="fas fa-user-circle"></i>
                     </li>
+                    {% if g.front_user %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{ g.front_user.username }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('front.logout') }}">Logout</a>
+                    </li>
+                    {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{url_for('front.signin')}}">Login</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{url_for('front.signup')}}">Register</a>
                     </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -75,7 +84,7 @@
             </div>
             <nav class="landing-section-grid mod-3">
                 <div>
-                    <a class="icon-link" href="/">
+                    <a class="icon-link" href="{{url_for('front.apost')}}">
                         <img class="icon-link-img" src="https://s1.ax1x.com/2022/05/04/OE16UK.png"
                             alt="LiveWhale Calendar User Guide" />
                         <div class="icon-link-text">
