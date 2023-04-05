@@ -4,7 +4,7 @@ from serendipity import create_app
 from exts import db
 from apps.cms import models as cms_models
 from apps.front import models as front_models
-
+from apps.models import BoardModel
 CMSUser = cms_models.CMSUser
 CMSRole = cms_models.CMSRole
 CMSPermission = cms_models.CMSPersmission

@@ -40,3 +40,9 @@ class ResetEmailForm(BaseForm):
         user = g.cms_user
         if user.email == email:
             raise ValidationError('Please enter a new email!')
+
+class AddBoardForm(BaseForm):
+    name = StringField(validators=[InputRequired(message='Please enter board name!')])
+
+class UpdateBoardForm(AddBoardForm):
+    board_id = IntegerField(validators=[InputRequired(message='Please enter board id!')])

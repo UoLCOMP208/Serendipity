@@ -1,7 +1,7 @@
 import os
 DEBUG = True
 
-SECRET_KEY = os.urandom(24)
+# SECRET_KEY = os.urandom(24)
 
 # hide warnings
 SQLALCHEMY_TRACK_MODIFICATIONS = False

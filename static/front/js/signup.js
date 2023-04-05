@@ -38,6 +38,11 @@ $(function(){
         var username = username_input.val();
         var password = password_input.val();
 
+        if (!email) {
+            zlalert.alertInfoToast('Please enter your email address!');
+            return;
+        }
+
         zlajax.post({
             'url': '/signup/',
             'data': {

@@ -1,6 +1,7 @@
 from flask import Blueprint, views, render_template, request, session, redirect, url_for, g
-from .forms import LoginForm, ResetpwdForm, ResetEmailForm
+from .forms import LoginForm, ResetpwdForm, ResetEmailForm, AddBoardForm, UpdateBoardForm
 from .models import CMSUser, CMSPersmission
+from ..models import BoardModel
 from .decorators import login_required, permission_required
 from exts import db, mail
 from utils import restful, zlcache
@@ -42,7 +43,8 @@ def email_captcha():
     source.extend(map(lambda x: str(x), range(0, 10)))
     captcha = "".join(random.sample(source, 6))
 
-    message = Message('Serendipity Forum Email Captcha', recipients=[email], body='Your email captcha is: %s' % captcha)
+    message = Message('Serendipity Forum Email Captcha', recipients=[
+                      email], body='Your email captcha is: %s' % captcha)
     try:
         mail.send(message)
     except:
@@ -50,11 +52,13 @@ def email_captcha():
     zlcache.set(email, captcha)
     return restful.success()
 
+
 @bp.route('/posts/')
 @login_required
 @permission_required(CMSPersmission.POSTER)
 def posts():
     return render_template('cms/cms_posts.html')
+
 
 @bp.route('/comments/')
 @login_required
@@ -62,11 +66,64 @@ def posts():
 def comments():
     return render_template('cms/cms_comments.html')
 
+
 @bp.route('/boards/')
 @login_required
 @permission_required(CMSPersmission.BOARDER)
 def boards():
-    return render_template('cms/cms_boards.html')
+    board_models = BoardModel.query.all()
+    context = {
+        'boards': board_models
+    }
+    return render_template('cms/cms_boards.html', **context)
+
+@bp.route('/aboard/',methods=['POST'])
+@login_required
+@permission_required(CMSPersmission.BOARDER)
+def aboard():
+    form = AddBoardForm(request.form)
+    if form.validate():
+        name = form.name.data
+        board = BoardModel(name=name)
+        db.session.add(board)
+        db.session.commit()
+        return restful.success()
+    else:
+        return restful.params_error(message=form.get_error())
+    
+@bp.route('/uboard/',methods=['POST'])
+@login_required
+@permission_required(CMSPersmission.BOARDER)
+def uboard():
+    form = UpdateBoardForm(request.form)
+    if form.validate():
+        board_id = form.board_id.data
+        name = form.name.data
+        board = BoardModel.query.get(board_id)
+        if board:
+            board.name = name
+            db.session.commit()
+            return restful.success()
+        else:
+            return restful.params_error(message='No such board!')
+    else:
+        return restful.params_error(message=form.get_error())
+    
+@bp.route('/dboard/',methods=['POST'])
+@login_required
+@permission_required(CMSPersmission.BOARDER)
+def dboard():
+    board_id = request.form.get("board_id")
+    if not board_id:
+        return restful.params_error('Please enter board_id!')
+
+    board = BoardModel.query.get(board_id)
+    if not board:
+        return restful.params_error(message='No such board!')
+
+    db.session.delete(board)
+    db.session.commit()
+    return restful.success()
 
 @bp.route('/fusers/')
 @login_required

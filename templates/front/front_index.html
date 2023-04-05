@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Serendipity Forum Login</title>
+    <title>Serendipity Forum</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <!-- Google Fonts Roboto -->
@@ -35,7 +35,7 @@
                 <a class="navbar-brand mt-2 mt-lg-0" href="/" style="margin-left: 100px; margin-right: 100px;">
                     <img src="/static/avatar.png" height="30" alt="MDB Logo" loading="lazy" />
                 </a>
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav mb-2 mb-lg-0" style="margin-right: 60em;">
                     <li class="nav-item" style="align-self: center;">
                         <i class="fas fa-home"></i>
                     </li>
@@ -47,19 +47,28 @@
                         <i class="fas fa-edit"></i>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Posts</a>
+                        <a class="nav-link" href="{{url_for('front.post_guide')}}">Posts</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav me-5 mb-2 mb-lg-0">
                     <li class="nav-item" style="align-self: center;">
                         <i class="fas fa-user-circle"></i>
                     </li>
+                    {% if g.front_user %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{ g.front_user.username }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('front.logout') }}">Logout</a>
+                    </li>
+                    {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{url_for('front.signin')}}">Login</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" style="margin-left: 5em;">
                         <a class="nav-link" href="{{url_for('front.signup')}}">Register</a>
                     </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -134,7 +143,7 @@
     <!-- End your project here-->
 
     <!-- MDB -->
-    <script type="text/javascript" src="../static/js/mdb.min.js"></script>
+    <script type="text/javascript" src="/static/front/js/mdb.min.js"></script>
     <!-- Custom scripts -->
     <script type="text/javascript"></script>
 </body>

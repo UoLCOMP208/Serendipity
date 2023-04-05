@@ -1,9 +1,10 @@
-from flask import Blueprint, views, render_template, request, session, url_for
+from flask import Blueprint, views, render_template, request, session, url_for, redirect
 from exts import mail, db
 from flask_mail import Message
 from utils import restful, zlcache, safeutils
 from .forms import SignupForm, SigninForm
 from .models import FrontUser
+from ..models import BoardModel
 import string
 import random
 import config
@@ -15,9 +16,26 @@ bp = Blueprint('front', __name__)
 def index():
     return render_template('front/front_index.html')
 
+@bp.route('/logout')
+def logout():
+    del session[config.FRONT_USER_ID]
+    return redirect(url_for('front.signin'))
+
 @bp.route("/user_guide")
 def user_guide():
     return render_template("front/front_userguide.html")
+
+@bp.route("/post_guide")
+def post_guide():
+    return render_template("front/front_postguide.html")
+
+@bp.route("/post_list")
+def post_list():
+    boards = BoardModel.query.all()
+    context = {
+        'boards': boards
+    }
+    return render_template("front/front_postlist.html", **context)
 
 
 class SignupView(views.MethodView):

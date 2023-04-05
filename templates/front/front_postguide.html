@@ -19,7 +19,7 @@
     <script src="/static/common/sweetalert/zlalert.js"></script>
     <script src="/static/common/zlajax.js"></script>
     <!-- User Guide -->
-    <link rel="stylesheet" href="/static/front/css/front_userguide.css" />
+    <link rel="stylesheet" href="/static/front/css/front_postguide.css" />
 </head>
 
 <body>
@@ -49,7 +49,7 @@
                         <i class="fas fa-edit"></i>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('front.post_guide')}}">Posts</a>
+                        <a class="nav-link" href="/">Posts</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav me-5 mb-2 mb-lg-0">
@@ -71,7 +71,7 @@
     <div class="container">
         <section class="landing-section">
             <div class="text">
-                <h1 style="font-size: 45pt">Getting Started</h1>
+                <h1 style="font-size: 45pt">Post Guide</h1>
             </div>
             <nav class="landing-section-grid mod-3">
                 <div>
@@ -97,7 +97,6 @@
                         </div>
                     </a>
                 </div>
-                <!-- https://s1.ax1x.com/2022/05/04/OE1BuR.png like button-->
                 <div>
                     <a class="icon-link" href="{{ url_for('front.post_list') }}">
                         <img class="icon-link-img" src="https://s1.ax1x.com/2022/05/04/OE1DD1.png"
@@ -109,45 +108,16 @@
                     </a>
                 </div>
             </nav>
-            <nav class="landing-section-grid mod-3">
-                <div>
-                    <a class="icon-link">
-                        <img class="icon-link-img" src="https://s1.ax1x.com/2022/05/04/OE1yE6.png"
-                            alt="LiveWhale Calendar User Guide" />
-                        <div class="icon-link-text">
-                            <h3 class="icon-link-title">User Information</h3>
-                            <p class="icon-link-summary">Click the username in post detail page, you can see the user's
-                                information page. You can also access MyInfo page to customize your personal
-                                information.</p>
-                        </div>
-                    </a>
-                </div>
-                <div>
-                    <a class="icon-link" href="{{url_for('front.signin')}}">
-                        <img class="icon-link-img" src="https://s1.ax1x.com/2022/05/04/OE1c4O.png"
-                            alt="LiveWhale Calendar User Guide" />
-                        <div class="icon-link-text">
-                            <h3 class="icon-link-title">Login or Register</h3>
-                            <p class="icon-link-summary">Click the “Login” on the navigation bar, fill in the form and
-                                login to Serendipity. If you don't have an account, click “Register” at its right.
-                            </p>
-                        </div>
-                    </a>
-                </div>
-                <div>
-                    <a class="icon-link">
-                        <img class="icon-link-img" src="https://s1.ax1x.com/2022/05/21/Oj1vEF.png"
-                            alt="LiveWhale Calendar User Guide" />
-                        <div class="icon-link-text">
-                            <h3 class="icon-link-title">Management System</h3>
-                            <p class="icon-link-summary">Only for super admins. Forum admins can manage user information
-                                and post information here.</p>
-                        </div>
-                    </a>
-                </div>
-            </nav>
         </section>
     </div>
+
+    <h2>
+        <a class="button rollover" style="text-decoration: none;"
+            href="{{url_for('front.user_guide')}}">
+            <span class="roll-text">Return to User Guide</span>
+            <span class="roll-text">Confirm</span>
+        </a>
+    </h2>
 
     <!-- footer -->
     <footer class="bg-light text-center text-lg-start fixed-bottom">
@@ -165,7 +135,7 @@
     <!-- End your project here-->
 
     <!-- MDB -->
-    <script type="text/javascript" src="../static/js/mdb.min.js"></script>
+    <script type="text/javascript" src="/static/front/js/mdb.min.js"></script>
     <!-- Custom scripts -->
     <script type="text/javascript"></script>
 </body>

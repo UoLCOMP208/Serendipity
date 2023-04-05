@@ -3,13 +3,38 @@
 {% block title %}Board Management{% endblock %}
 
 {% block head %}
-
+    <script src="/static/cms/js/boards.js"></script>
 {% endblock %}
 
 {% block page_title %}
- {{ self.title() }}
+{{ self.title() }}
 {% endblock %}
 
 {% block main_content %}
-    我是板块管理页面
+<div class="top-box">
+    <button class="btn btn-warning" style="float:right;" id="add-board-btn">Add a new board</button>
+</div>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Board Name</th>
+            <th>Number of posts</th>
+            <th>Creation time</th>
+            <th>Operation</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for board in boards %}
+        <tr data-name="{{ board.name }}" data-id="{{ board.id }}">
+            <td>{{ board.name }}</td>
+            <td>0</td>
+            <td>{{ board.create_time }}</td>
+            <td>
+                <button class="btn btn-default btn-sm edit-board-btn">Edit</button>
+                <button class="btn btn-danger btn-xs delete-board-btn">Delete</button>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

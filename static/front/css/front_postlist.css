@@ -1,0 +1,23 @@
+body {
+    /* font-family: 'Noto Sans', serif; */
+    /* background: linear-gradient(#141e30, #243b55); */
+    background-color:#f2f2f2;
+    margin: 0;
+    height: 100%;
+}
+
+.btn.btn-outline-primary {
+    color: #4892ff;
+    background-color: transparent;
+    border-color: #4892ff;
+}
+
+.btn.btn-outline-primary.active {
+    color: #fff;
+    background-color: #4892ff;
+    border-color: #4892ff;
+}
+
+.card-header.text-md-center.bg-body-secondary {
+    background-color: #3177BB;
+}
