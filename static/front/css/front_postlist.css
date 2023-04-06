@@ -21,3 +21,37 @@ body {
 .card-header.text-md-center.bg-body-secondary {
     background-color: #3177BB;
 }
+
+.post-group{
+    height: 40px;
+}
+
+.post-group-head{
+    padding-left: 0;
+    overflow: hidden;
+    list-style: none;
+}
+
+.post-group-head li{
+    float: left;
+    padding: 10px;
+}
+
+.post-group-head li :hover{
+    text-decoration: underline #0b80ee;
+}
+
+.post-group-head li a{
+    color:#0b80ee;
+}
+
+.post-group-head li.active{
+    /* background: #ccc; */
+    text-decoration: underline #0b80ee;
+}
+
+.post-group-head li.sort{
+    font-size:large;
+    font-style: bold;
+}
+

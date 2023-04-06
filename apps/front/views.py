@@ -26,15 +26,17 @@ def logout():
 def user_guide():
     return render_template("front/front_userguide.html")
 
-@bp.route("/post_guide")
-def post_guide():
-    return render_template("front/front_postguide.html")
+# @bp.route("/post_guide")
+# def post_guide():
+#     return render_template("front/front_postguide.html")
 
 @bp.route("/post_list")
 def post_list():
     boards = BoardModel.query.all()
+    posts = PostModel.query.all()
     context = {
-        'boards': boards
+        'boards': boards,
+        'posts': posts
     }
     return render_template("front/front_postlist.html", **context)
 
