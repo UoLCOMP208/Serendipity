@@ -37,3 +37,7 @@ class AddPostForm(BaseForm):
     title = wtforms.StringField(validators=[InputRequired(message='Please enter title!')])
     content = wtforms.StringField(validators=[InputRequired(message='Please enter content!')])
     board_id = wtforms.IntegerField(validators=[InputRequired(message='Please enter board id!')])
+
+class AddCommentForm(BaseForm):
+    content = wtforms.StringField(validators=[InputRequired(message='Please enter content!')])
+    post_id = wtforms.IntegerField(validators=[InputRequired(message='Please enter post id!')])

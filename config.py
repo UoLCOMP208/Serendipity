@@ -29,3 +29,6 @@ MAIL_PORT = 587
 MAIL_USERNAME = "xinchi.shi20@gmail.com"
 MAIL_PASSWORD = "smzewsthweshmacs"
 MAIL_DEFAULT_SENDER = "xinchi.shi20@gmail.com"
+
+# Configuration for flask-paginate
+PER_PAGE = 2

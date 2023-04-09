@@ -4,7 +4,7 @@ from serendipity import create_app
 from exts import db
 from apps.cms import models as cms_models
 from apps.front import models as front_models
-from apps.models import BoardModel
+from apps.models import BoardModel, PostModel
 CMSUser = cms_models.CMSUser
 CMSRole = cms_models.CMSRole
 CMSPermission = cms_models.CMSPersmission
@@ -84,6 +84,20 @@ def test_permission():
         print('This user has visitor rights')
     else:
         print('This user has no visitor rights')
+
+@manager.command
+def create_test_post():
+    for x in range(1,205):
+        title = 'Tiele%s'%x
+        content = 'Content:%s' % x
+        board = BoardModel.query.first()
+        author = FrontUser.query.first()
+        post = PostModel(title=title,content=content)
+        post.board = board
+        post.author = author
+        db.session.add(post)
+        db.session.commit()
+    print('Congrats, test posts created successfully!')
 
 
 if __name__ == '__main__':

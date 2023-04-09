@@ -101,7 +101,8 @@
                 </form>
             </div>
             <div class="col-2 d-flex flex-column justify-content-end" style="margin-right: 0;">
-                <a href="{{url_for('front.apost')}}" type="button" class="btn btn-info btn-rounded btn-lg" style="font-size: medium;">Publish post</a>
+                <a href="{{url_for('front.apost')}}" type="button" class="btn btn-info btn-rounded btn-lg"
+                    style="font-size: medium;">Publish post</a>
             </div>
         </div>
     </div>
@@ -121,77 +122,51 @@
                     </ul>
                 </div>
                 <div class="card-deck">
-                    <!-- <div class="card my-3 shadow post-tag study">
-                        <div class="card-body">
-                            <h5 class="card-title">Post Title 1</h5>
-                            <p class="card-text"><small class="text-muted">Jack</small></p>
-                            <span class="badge bg-danger position-absolute top-0 end-0 rounded-pill">13</span>
-                            <div class="d-inline-block text-truncate w-100 row" style="max-width: 150px; padding: 10px">
-                                post.content
-                            </div>
-                            <p class="card-text"><small class="text-muted">Tag: Study</small></p>
-                            <a href="#" class="btn btn-outline-secondary">View</a>
-                        </div>
-                    </div>
-                    <div class="card my-3 shadow post-tag gaming">
-                        <div class="card-body">
-                            <h5 class="card-title">Post Title 2</h5>
-                            <p class="card-text"><small class="text-muted">Jack</small></p>
-                            <span class="badge bg-danger position-absolute top-0 end-0 rounded-pill">13</span>
-                            <div class="d-inline-block text-truncate w-100 row" style="max-width: 150px; padding: 10px">
-                                post.content
-                            </div>
-                            <p class="card-text"><small class="text-muted">Tag: gaming</small></p>
-                            <a href="#" class="btn btn-outline-secondary">View</a>
-                        </div>
-                    </div>
-                    <div class="card my-3 shadow post-tag gaming">
-                        <div class="card-body">
-                            <h5 class="card-title">Post Title 2</h5>
-                            <p class="card-text"><small class="text-muted">Jack</small></p>
-                            <span class="badge bg-danger position-absolute top-0 end-0 rounded-pill">13</span>
-                            <div class="d-inline-block text-truncate w-100 row" style="max-width: 150px; padding: 10px">
-                                post.content
-                            </div>
-                            <p class="card-text"><small class="text-muted">Tag: gaming</small></p>
-                            <a href="#" class="btn btn-outline-secondary">View</a>
-                        </div>
-                    </div> -->
-
                     {% for post in posts %}
-                        <div class="card my-3 shadow post-tag" data-board-name="{{ post.board.name }}">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ post.title }}</h5>
-                                <p class="card-text"><small class="text-muted">Author: {{ post.author.username }}</small></p>
-                                <span class="badge bg-danger position-absolute top-0 end-0 rounded-pill">13</span>
-                                <div class="d-inline-block text-truncate w-100 row" style="max-width: 150px; padding: 10px">
-                                    {{ post.content|striptags }}
-                                </div>
-                                <p class="card-text"><small class="text-muted">Tag: {{ post.board.name }}</small></p>
-                                <a href="#" class="btn btn-outline-secondary">View</a>
+                    <div class="card my-3 shadow post-tag" data-board-name="{{ post.board.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href='{{ url_for("front.post_detail",post_id=post.id) }}'>
+                                    {{ post.title }}
+                                </a>
+                            </h5>
+                            <p class="card-text"><small class="text-muted">Author: {{ post.author.username }}</small>
+                            </p>
+                            <span class="badge bg-danger position-absolute top-0 end-0 rounded-pill">13</span>
+                            <div class="d-inline-block text-truncate w-100 row" style="max-width: 150px; padding: 10px">
+                                {{ post.content|striptags }}
                             </div>
+                            <p class="card-text"><small class="text-muted">Tag: {{ post.board.name }}</small></p>
+                            <a href='{{ url_for("front.post_detail",post_id=post.id) }}' class="btn btn-outline-success">View</a>
                         </div>
+                    </div>
                     {% endfor %}
                 </div>
+                <div style="margin-left: 400px;">
+                    {{ pagination.links }}
+                </div>
             </div>
+
+
 
             <div class="col-1"></div>
             <div class="col-2">
                 <div class="card shadow" style="margin-top: 50px;">
                     <div class="card-header text-md-center bg-body-secondary" style="height: 50px; color: white;">
                         Boards
-                    </div> 
+                    </div>
                     <div class="btn-group-vertical rounded-bottom" role="group" aria-label="Filter by tag">
-                        <button type="button" class="btn btn-outline-primary rounded-0 active" data-filter="all">All</button>
+                        <button type="button" class="btn btn-outline-primary rounded-0 active"
+                            data-filter="all">All</button>
                         {% for board in boards %}
-                            <button type="button" class="btn btn-outline-primary" data-filter="{{ board.name }}">{{ board.name }}</button>
+                        <button type="button" class="btn btn-outline-primary" data-filter="{{ board.name }}">{{
+                            board.name }}</button>
                         <!-- <button type="button" class="btn btn-outline-primary" data-filter="study">Study</button>
                         <button type="button" class="btn btn-outline-primary" data-filter="gaming">Gaming</button>
                         <button type="button" class="btn btn-outline-primary" data-filter="food">Food</button>
                         <button type="button" class="btn btn-outline-primary" data-filter="sport">Sport</button> -->
                         {% endfor %}
                     </div>
-
                 </div>
             </div>
             <div class="col-1"></div>
@@ -208,7 +183,7 @@
         <div class="text-center p-3" style="background-color:white">
             © Serendipity 2023 Copyright: Group3
             <a class="btn text-white btn-floating btn-sm" style="background-color: #333333; margin-left: 10px;"
-                href="https://github.com/UoLCOMP208/Student-social-forum-Serendipity-" role="button">
+                href="https://github.com/UoLCOMP208/Serendipity" role="button">
                 <i class="fab fa-github"></i>
             </a>
         </div>
@@ -241,7 +216,6 @@
             });
         });
     </script>
-
 
 </body>
 

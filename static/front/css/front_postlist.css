@@ -55,3 +55,9 @@ body {
     font-style: bold;
 }
 
+ul.pagination{
+    --mdb-pagination-active-bg: #0071a1;
+    --mdb-pagination-active-color: #fff;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
