@@ -1,7 +1,7 @@
 from flask import Blueprint, views, render_template, request, session, redirect, url_for, g
 from .forms import LoginForm, ResetpwdForm, ResetEmailForm, AddBoardForm, UpdateBoardForm
 from .models import CMSUser, CMSPersmission
-from ..models import BoardModel
+from ..models import BoardModel, PostModel, HighlightPostModel
 from .decorators import login_required, permission_required
 from exts import db, mail
 from utils import restful, zlcache
@@ -57,7 +57,42 @@ def email_captcha():
 @login_required
 @permission_required(CMSPersmission.POSTER)
 def posts():
-    return render_template('cms/cms_posts.html')
+    post_list = PostModel.query.all()
+    return render_template('cms/cms_posts.html', posts=post_list)
+
+
+@bp.route('/hpost/', methods=['POST'])
+@login_required
+@permission_required(CMSPersmission.POSTER)
+def hpost():
+    post_id = request.form.get("post_id")
+    if not post_id:
+        return restful.params_error('Please enter post_id!')
+    post = PostModel.query.get(post_id)
+    if not post:
+        return restful.params_error("No such post!")
+
+    highlight = HighlightPostModel()
+    highlight.post = post
+    db.session.add(highlight)
+    db.session.commit()
+    return restful.success()
+
+@bp.route('/uhpost/',methods=['POST'])
+@login_required
+@permission_required(CMSPersmission.POSTER)
+def uhpost():
+    post_id = request.form.get("post_id")
+    if not post_id:
+        return restful.params_error('Please enter post_id!')
+    post = PostModel.query.get(post_id)
+    if not post:
+        return restful.params_error("No such post!")
+
+    highlight = HighlightPostModel.query.filter_by(post_id=post_id).first()
+    db.session.delete(highlight)
+    db.session.commit()
+    return restful.success()
 
 
 @bp.route('/comments/')
@@ -77,7 +112,8 @@ def boards():
     }
     return render_template('cms/cms_boards.html', **context)
 
-@bp.route('/aboard/',methods=['POST'])
+
+@bp.route('/aboard/', methods=['POST'])
 @login_required
 @permission_required(CMSPersmission.BOARDER)
 def aboard():
@@ -90,8 +126,9 @@ def aboard():
         return restful.success()
     else:
         return restful.params_error(message=form.get_error())
-    
-@bp.route('/uboard/',methods=['POST'])
+
+
+@bp.route('/uboard/', methods=['POST'])
 @login_required
 @permission_required(CMSPersmission.BOARDER)
 def uboard():
@@ -108,8 +145,9 @@ def uboard():
             return restful.params_error(message='No such board!')
     else:
         return restful.params_error(message=form.get_error())
-    
-@bp.route('/dboard/',methods=['POST'])
+
+
+@bp.route('/dboard/', methods=['POST'])
 @login_required
 @permission_required(CMSPersmission.BOARDER)
 def dboard():
@@ -125,17 +163,20 @@ def dboard():
     db.session.commit()
     return restful.success()
 
+
 @bp.route('/fusers/')
 @login_required
 @permission_required(CMSPersmission.FRONTUSER)
 def fusers():
     return render_template('cms/cms_fusers.html')
 
+
 @bp.route('/cusers/')
 @login_required
 @permission_required(CMSPersmission.CMSUSER)
 def cusers():
     return render_template('cms/cms_cusers.html')
+
 
 @bp.route('/croles/')
 @login_required

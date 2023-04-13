@@ -61,3 +61,11 @@ ul.pagination{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.post-info-group2{
+    font-size: 15px;
+    color: #8c8c8c;
+}
+
+.post-info-group2 span{
+    margin-right: 20px;
+}

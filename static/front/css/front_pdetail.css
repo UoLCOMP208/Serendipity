@@ -26,3 +26,12 @@ body {
 .post-info-group span{
     margin-right: 20px;
 }
+
+.post-info-group2 {
+    font-size: 15px;
+    color: #8c8c8c;
+}
+
+.simditor .simditor-body {
+    min-height: 40px;
+}

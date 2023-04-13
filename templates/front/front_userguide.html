@@ -57,6 +57,7 @@
                         <i class="fas fa-user-circle"></i>
                     </li>
                     {% if g.front_user %}
+                    <span id="login-tag" data-is-login='1' style="display: none;"></span>
                     <li class="nav-item">
                         <a class="nav-link" href="#">{{ g.front_user.username }}</a>
                     </li>
@@ -89,8 +90,8 @@
                             alt="LiveWhale Calendar User Guide" />
                         <div class="icon-link-text">
                             <h3 class="icon-link-title">Publish Posts</h3>
-                            <p class="icon-link-summary">Click “POST SOMETHING!” on the posts list page. Type something
-                                in the box and submit it.</p>
+                            <p class="icon-link-summary">Click “PUBLISH POST” on the post list page. Name a title and choose a board first. Type something
+                                in the box and then submit it.</p>
                         </div>
                     </a>
                 </div>
@@ -101,7 +102,7 @@
 
                         <div class="icon-link-text">
                             <h3 class="icon-link-title">Search Posts</h3>
-                            <p class="icon-link-summary">In homepage, you can enter keywords in the search bar to find
+                            <p class="icon-link-summary">In the post list page, you can enter keywords in the search bar to find
                                 relevant posts.</p>
                         </div>
                     </a>
@@ -113,7 +114,9 @@
                             alt="LiveWhale Calendar User Guide" />
                         <div class="icon-link-text">
                             <h3 class="icon-link-title">View Posts</h3>
-                            <p class="icon-link-summary">You can view the post list by clicking this</p>
+                            <p class="icon-link-summary">You can enter the post list page and view all the posts by clicking here. After doing so, 
+                                you can click the 'view' button to see the details of the post.
+                            </p>
                         </div>
                     </a>
                 </div>
@@ -121,18 +124,17 @@
             <nav class="landing-section-grid mod-3">
                 <div>
                     <a class="icon-link">
-                        <img class="icon-link-img" src="https://s1.ax1x.com/2022/05/04/OE1yE6.png"
+                        <img class="icon-link-img" src="https://s1.ax1x.com/2023/04/13/ppx4P54.png"
                             alt="LiveWhale Calendar User Guide" />
                         <div class="icon-link-text">
-                            <h3 class="icon-link-title">User Information</h3>
-                            <p class="icon-link-summary">Click the username in post detail page, you can see the user's
-                                information page. You can also access MyInfo page to customize your personal
-                                information.</p>
+                            <h3 class="icon-link-title">Sort Posts</h3>
+                            <p class="icon-link-summary">
+                                In the post list page, you can sort the posts according to the time when they were published, the featured posts or most comments.</p>
                         </div>
                     </a>
                 </div>
                 <div>
-                    <a class="icon-link" href="{{url_for('front.signin')}}">
+                    <a class="icon-link">
                         <img class="icon-link-img" src="https://s1.ax1x.com/2022/05/04/OE1c4O.png"
                             alt="LiveWhale Calendar User Guide" />
                         <div class="icon-link-text">
@@ -144,7 +146,7 @@
                     </a>
                 </div>
                 <div>
-                    <a class="icon-link">
+                    <a class="icon-link" href="{{ url_for('cms.login') }}">
                         <img class="icon-link-img" src="https://s1.ax1x.com/2022/05/21/Oj1vEF.png"
                             alt="LiveWhale Calendar User Guide" />
                         <div class="icon-link-text">

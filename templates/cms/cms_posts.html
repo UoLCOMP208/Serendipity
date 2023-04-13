@@ -3,13 +3,42 @@
 {% block title %}Post Management{% endblock %}
 
 {% block head %}
-
+<script src="/static/cms/js/posts.js"></script>
 {% endblock %}
 
 {% block page_title %}
- {{ self.title() }}
+{{ self.title() }}
 {% endblock %}
 
 {% block main_content %}
-    我是帖子管理页面
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Create_time</th>
+            <th>Board</th>
+            <th>Author</th>
+            <th>Operation</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for post in posts %}
+        <tr data-id="{{ post.id }}" data-highlight="{{ 1 if post.highlight else 0 }}">
+            <td><a target="_blank" href='{{ url_for("front.post_detail",post_id=post.id) }}'>{{ post.title }}</a></td>
+            <td>{{ post.create_time }}</td>
+            <td>{{ post.board.name }}</td>
+            <td>{{ post.author.username }}</td>
+            <td>
+                {% if post.highlight %}
+                <button class="btn btn-default btn-xs highlight-btn">Unhighlight</button>
+                {% else %}
+                <button class="btn btn-default btn-xs highlight-btn">Highlight</button>
+                {% endif %}
+                <button class="btn btn-danger btn-xs">Delete</button>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
 {% endblock %}

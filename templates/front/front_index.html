@@ -55,6 +55,7 @@
                         <i class="fas fa-user-circle"></i>
                     </li>
                     {% if g.front_user %}
+                    <span id="login-tag" data-is-login='1' style="display: none"></span>
                     <li class="nav-item">
                         <a class="nav-link" href="#">{{ g.front_user.username }}</a>
                     </li>

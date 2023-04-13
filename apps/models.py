@@ -30,3 +30,11 @@ class CommentModel(db.Model):
 
     post = db.relationship("PostModel",backref='comments')
     author = db.relationship("FrontUser",backref='comments')
+
+class HighlightPostModel(db.Model):
+    __tablename__ = 'highlight_post'
+    id = db.Column(db.Integer,primary_key=True,autoincrement=True)
+    post_id = db.Column(db.Integer,db.ForeignKey("post.id"))
+    create_time = db.Column(db.DateTime,default=datetime.now)
+
+    post = db.relationship("PostModel",backref="highlight")

@@ -4,9 +4,10 @@ from flask_mail import Message
 from utils import restful, zlcache, safeutils
 from .forms import SignupForm, SigninForm, AddPostForm, AddCommentForm
 from .models import FrontUser
-from ..models import BoardModel, PostModel, CommentModel
+from ..models import BoardModel, PostModel, CommentModel, HighlightPostModel
 from .decorators import login_required
 from flask_paginate import Pagination, get_page_parameter
+from sqlalchemy.sql import func
 import string
 import random
 import config
@@ -38,15 +39,38 @@ def user_guide():
 def post_list():
     boards = BoardModel.query.all()
     page = request.args.get(get_page_parameter(), type=int, default=1)
+    sort = request.args.get('st', type=int, default=1)
     start = (page-1)*config.PER_PAGE
     end = start + config.PER_PAGE
-    posts = PostModel.query.slice(start, end)
-    pagination = Pagination(page=page, total=PostModel.query.count(
-    ), outer_window=0, inner_window=2, show_single_page=True, per_page=2)
+    total = 0
+    q = request.args.get('q')
+    query_obj = PostModel.query
+
+    # query_obj = None
+    if sort == 1:
+        # query_obj = db.session.query(PostModel).outerjoin(HighlightPostModel).order_by(
+        #     HighlightPostModel.create_time.desc(), PostModel.create_time.desc())
+        query_obj = PostModel.query.order_by(PostModel.create_time.desc())
+    elif sort == 2:
+        # Desceding by featured posts&create_time
+        query_obj = db.session.query(PostModel).outerjoin(HighlightPostModel).order_by(
+            HighlightPostModel.create_time.desc(), PostModel.create_time.desc())
+    elif sort == 3:
+        # Desceding by comments&create_time
+        query_obj = db.session.query(PostModel).outerjoin(CommentModel).group_by(
+            PostModel.id).order_by(func.count(CommentModel.id).desc(), PostModel.create_time.desc())
+    if q:
+        query_obj = query_obj.filter(PostModel.title.contains(q))
+    posts = query_obj.slice(start, end)
+    total = query_obj.count()
+
+    pagination = Pagination(page=page, total=total, outer_window=0,
+                            inner_window=2, show_single_page=True, per_page=2)
     context = {
         'boards': boards,
         'posts': posts,
         'pagination': pagination,
+        'current_sort': sort,
     }
     print(context)
     return render_template("front/front_postlist.html", **context)

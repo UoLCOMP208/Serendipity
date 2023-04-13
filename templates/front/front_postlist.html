@@ -64,6 +64,7 @@
                         <i class="fas fa-user-circle"></i>
                     </li>
                     {% if g.front_user %}
+                    <span id="login-tag" data-is-login='1' style="display: none;"></span>
                     <li class="nav-item">
                         <a class="nav-link" href="#">{{ g.front_user.username }}</a>
                     </li>
@@ -90,21 +91,28 @@
             <div class="col-2"></div>
             <div class="col-7">
                 <h1>Search</h1>
-                <form>
+                <!-- <form>
                     <div class="input-group mb-3 w-75">
                         <input type="text" class="form-control" placeholder="Search term" aria-label="Search term"
                             aria-describedby="button-search">
-                        <!--后端需要写search term的传入函数来使搜索框显示搜索内容 -->
                         <button class="btn btn-warning" type="submit" id="button-search" style="font-size: 20px">Search
                         </button>
                     </div>
+                </form> -->
+
+                <form class="input-group" style="width: 80%; margin-bottom: 20px;" method="GET" action="{{ url_for('front.post_list') }}">
+                    <input type="search" class="form-control rounded" placeholder="Search terms" aria-label="Search"
+                        aria-describedby="search-addon" name="q"/>
+                    <button type="submit" class="btn btn-warning" style="font-size: 18px;">search</button>
                 </form>
+
             </div>
             <div class="col-2 d-flex flex-column justify-content-end" style="margin-right: 0;">
                 <a href="{{url_for('front.apost')}}" type="button" class="btn btn-info btn-rounded btn-lg"
                     style="font-size: medium;">Publish post</a>
             </div>
         </div>
+
     </div>
 
     <!-- <div class="my-5"></div> -->
@@ -117,8 +125,23 @@
                 <div class="post-group">
                     <ul class="post-group-head">
                         <li class="sort">Sort by:</li>
-                        <li class="active"><a href="#">Latest</a></li>
-                        <li><a href="#">Most commented</a></li>
+                        {% if current_sort == 1 %}
+                        <li class="active"><a href='{{ url_for("front.post_list",st=1) }}'>Latest</a></li>
+                        {% else %}
+                        <li><a href='{{ url_for("front.post_list",st=1) }}'>Latest</a></li>
+                        {% endif %}
+                        
+                        {% if current_sort == 2 %}
+                        <li class="active"><a href='{{ url_for("front.post_list",st=2) }}'>Featured</a></li>
+                        {% else %}
+                        <li><a href='{{ url_for("front.post_list",st=2) }}'>Featured</a></li>
+                        {% endif %}
+                        
+                        {% if current_sort == 3 %}
+                        <li class="active"><a href='{{ url_for("front.post_list",st=3) }}'>Most commented</a></li>
+                        {% else %}
+                        <li><a href='{{ url_for("front.post_list",st=3) }}'>Most commented</a></li>
+                        {% endif %}
                     </ul>
                 </div>
                 <div class="card-deck">
@@ -126,18 +149,23 @@
                     <div class="card my-3 shadow post-tag" data-board-name="{{ post.board.name }}">
                         <div class="card-body">
                             <h5 class="card-title">
-                                <a href='{{ url_for("front.post_detail",post_id=post.id) }}'>
-                                    {{ post.title }}
-                                </a>
+                                {{ post.title }}
+                                {% if post.highlight %}
+                                <span class="badge rounded-pill badge-warning">Featured Post</span>
+                                {% endif %}
                             </h5>
-                            <p class="card-text"><small class="text-muted">Author: {{ post.author.username }}</small>
+                            <div class="post-info-group2">
+                                <span>Author: {{ post.author.username }}</span>
+                                <span>Posting Time: {{ post.create_time }}</span>
+                            </div>
                             </p>
-                            <span class="badge bg-danger position-absolute top-0 end-0 rounded-pill">13</span>
+                            <!-- <span class="badge bg-danger position-absolute top-0 end-0 rounded-pill"></span> -->
                             <div class="d-inline-block text-truncate w-100 row" style="max-width: 150px; padding: 10px">
                                 {{ post.content|striptags }}
                             </div>
                             <p class="card-text"><small class="text-muted">Tag: {{ post.board.name }}</small></p>
-                            <a href='{{ url_for("front.post_detail",post_id=post.id) }}' class="btn btn-outline-success">View</a>
+                            <a href='{{ url_for("front.post_detail",post_id=post.id) }}'
+                                class="btn btn-outline-primary">View</a>
                         </div>
                     </div>
                     {% endfor %}

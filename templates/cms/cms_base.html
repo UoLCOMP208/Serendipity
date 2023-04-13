@@ -35,9 +35,6 @@
                     <li><a href="{{  url_for('cms.profile')  }}">{{g.cms_user.username}}</a></li>
                     <li><a href="{{  url_for('cms.logout')  }}">Logout</a></li>
                 </ul>
-                <form class="navbar-form navbar-right">
-                    <input type="text" class="form-control" placeholder="Search...">
-                </form>
             </div>
         </div>
     </nav>
@@ -61,9 +58,9 @@
                         <li class="nav-group post-manage"><a href="{{ url_for('cms.posts') }}">Post Management</a></li>
                     {% endif %}
 
-                    {% if cms_user.has_permission(CMSPermission.BOARDER) %}
+                    <!-- {% if cms_user.has_permission(CMSPermission.BOARDER) %}
                         <li class="comments-manage"><a href="{{ url_for('cms.comments') }}">Comment Management</a></l>
-                    {% endif %}
+                    {% endif %} -->
 
                     {% if cms_user.has_permission(CMSPermission.BOARDER) %}
                     <li class="board-manage"><a href="{{ url_for('cms.boards') }}">Board Management</a></li>
