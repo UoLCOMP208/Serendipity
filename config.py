@@ -9,7 +9,8 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 SECRET_KEY = 'comp208'
 
 # Configuration variables for the database
-HOSTNAME = '127.0.0.1'
+# 47.243.187.169
+HOSTNAME = '47.243.187.169' 
 PORT     = '3306'
 DATABASE = 'serendipity'
 USERNAME = 'root'
