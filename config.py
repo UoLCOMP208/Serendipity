@@ -1,12 +1,12 @@
 import os
 DEBUG = True
 
-# SECRET_KEY = os.urandom(24)
+SECRET_KEY = os.urandom(24)
 
 # hide warnings
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-SECRET_KEY = 'comp208'
+# SECRET_KEY = 'comp208'
 
 # Configuration variables for the database
 #  127.0.0.1 47.243.187.169
