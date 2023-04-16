@@ -10,8 +10,8 @@ SECRET_KEY = 'comp208'
 
 # Configuration variables for the database
 #  127.0.0.1 47.243.187.169
-HOSTNAME = '0.0.0.0' 
-PORT     = '80' # 3306
+HOSTNAME = '127.0.0.1' 
+PORT     = '3306' # 3306
 DATABASE = 'serendipity'
 USERNAME = 'root'
 PASSWORD = 'SXc2002627SXc'
