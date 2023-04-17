@@ -5,6 +5,10 @@ $(function () {
         if (!email) {
             zlalert.alertInfoToast('Please enter your email address!');
             return;
+        } 
+        if (!email.endsWith("@liverpool.ac.uk")) {
+            zlalert.alertInfoToast('Email must be from liverpool.ac.uk domain');
+            return;
         }
         zlajax.get({
             'url': '/email_captcha/',

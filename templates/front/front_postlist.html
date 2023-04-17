@@ -188,15 +188,12 @@
                         Boards
                     </div>
                     <div class="btn-group-vertical rounded-bottom" role="group" aria-label="Filter by tag">
-                        <button type="button" class="btn btn-outline-primary rounded-0 active"
-                            data-filter="all">All</button>
+                        <a href="{{ url_for('front.post_list') }}"
+                            class="btn btn-outline-primary rounded-0 active">All</a>
                         {% for board in boards %}
-                        <button type="button" class="btn btn-outline-primary" data-filter="{{ board.name }}">{{
-                            board.name }}</button>
-                        <!-- <button type="button" class="btn btn-outline-primary" data-filter="study">Study</button>
-                        <button type="button" class="btn btn-outline-primary" data-filter="gaming">Gaming</button>
-                        <button type="button" class="btn btn-outline-primary" data-filter="food">Food</button>
-                        <button type="button" class="btn btn-outline-primary" data-filter="sport">Sport</button> -->
+                        <button type="button" class="btn btn-outline-primary"
+                            href='{{ url_for("front.post_list", board_id=board.id) }}'>{{ board.name
+                            }}</button>
                         {% endfor %}
                     </div>
                 </div>
@@ -211,7 +208,6 @@
     <!-- footer -->
     <footer class="bg-light text-center text-lg-start fixed-bottom">
         <!-- Copyright -->
-        <!-- <div class="text-center p-3" style="background-color:rgba(0, 0, 0, 0.05);"> -->
         <div class="text-center p-3" style="background-color:white">
             © Serendipity 2023 Copyright: Group3
             <a class="btn text-white btn-floating btn-sm" style="background-color: #333333; margin-left: 10px;"
@@ -221,7 +217,6 @@
         </div>
         <!-- Copyright -->
     </footer>
-
 
     <script>
         $(document).ready(function () {
@@ -246,8 +241,14 @@
                 // Activate the selected button and disable the other buttons
                 $(this).addClass('active').siblings().removeClass('active');
             });
+
+            // Binding click event to board buttons
+            $('.btn-group-vertical .btn').click(function () {
+                window.location.href = $(this).attr('href');
+            });
         });
     </script>
+
 
     <!-- MDB -->
     <script type="text/javascript" src="/static/front/js/mdb.min.js"></script>

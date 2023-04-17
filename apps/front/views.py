@@ -35,8 +35,9 @@ def user_guide():
 #     return render_template("front/front_postguide.html")
 
 
-@bp.route("/post_list")
-def post_list():
+@bp.route("/post_list", defaults={'board_id': None})
+@bp.route("/post_list/<int:board_id>")
+def post_list(board_id=None):
     boards = BoardModel.query.all()
     page = request.args.get(get_page_parameter(), type=int, default=1)
     sort = request.args.get('st', type=int, default=1)
@@ -48,8 +49,6 @@ def post_list():
 
     # query_obj = None
     if sort == 1:
-        # query_obj = db.session.query(PostModel).outerjoin(HighlightPostModel).order_by(
-        #     HighlightPostModel.create_time.desc(), PostModel.create_time.desc())
         query_obj = PostModel.query.order_by(PostModel.create_time.desc())
     elif sort == 2:
         # Desceding by featured posts&create_time
@@ -61,6 +60,8 @@ def post_list():
             PostModel.id).order_by(func.count(CommentModel.id).desc(), PostModel.create_time.desc())
     if q:
         query_obj = query_obj.filter(PostModel.title.contains(q))
+    if board_id:
+        query_obj = query_obj.filter(PostModel.board_id == board_id)
     posts = query_obj.slice(start, end)
     total = query_obj.count()
 
@@ -148,7 +149,7 @@ class SignupView(views.MethodView):
             db.session.commit()
             return restful.success()
         else:
-            print(form.get_error())
+            # print(form.get_error())
             return restful.params_error(message=form.get_error())
 
 
