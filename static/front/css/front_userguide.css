@@ -70,36 +70,35 @@ body {
 }
 
 .landing-section-grid.mod-3 {
-    display: flex; 
+    /* display: flex; 
     flex-wrap: wrap; 
-    justify-content: space-between; 
+    justify-content: space-between;  */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1.25rem;
 }
 
 .landing-section-grid.mod-3>* {
-    display: block;
+    /* display: block;
     float: left;
-    /* width: 33%; */
-    /* padding: 20px 0; */
     width: calc(33% - 10px); 
-    padding: 1.25rem 0; 
+    padding: 1.25rem 0;  */
+    display: block;
+    padding: 1.25rem 0;
 }
 
-.landing-section-grid.mod-3>*:nth-child(3n-2) {
-    /* padding-right: 10px; */
+/* .landing-section-grid.mod-3>*:nth-child(3n-2) {
     padding-right: 0.625rem;
 }
 
 .landing-section-grid.mod-3>*:nth-child(3n-1) {
-    /* padding-left: 5px;
-    padding-right: 5px; */
     padding-left: 0.3125rem;
     padding-right: 0.3125rem; 
 }
 
 .landing-section-grid.mod-3>*:nth-child(3n) {
-    /* padding-left: 10px; */
     padding-left: 0.625rem;
-}
+} */
 
 .icon-link {
     display: block;
@@ -140,8 +139,8 @@ body {
     font-size: 0.9rem;
 }
 
-/* 当页面缩放至125%时 */
-@media screen and (min-resolution: 120dpi) {
+/* 当屏幕宽度小于 1200px 时 */
+@media screen and (max-width: 1200px) {
     .text {
         font-size: 1.8em; /* 调整这里，减小字体大小 */
     }
@@ -153,5 +152,11 @@ body {
     .icon-link {
         padding: 1rem; /* 调整这里，减小内边距 */
         height: 200px; /* 调整这里，减小高度 */
+    }
+}
+
+@media (max-width: 480px) {
+    .landing-section-grid.mod-3 {
+        grid-template-columns: repeat(1, 1fr);
     }
 }

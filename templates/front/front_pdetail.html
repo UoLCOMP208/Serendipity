@@ -35,46 +35,49 @@
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
         <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
-                aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
+            <button class="navbar-toggler d-flex align-items-center" type="button" data-mdb-toggle="collapse"
+                data-mdb-target="#navbarExample01" aria-controls="navbarExample01" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars me-2"></i>
+                <!-- <span>Menu</span> -->
             </button>
             <div class="collapse navbar-collapse" id="navbarExample01">
-                <a class="navbar-brand mt-2 mt-lg-0" href="/" style="margin-left: 100px; margin-right: 100px;">
+                <a class="navbar-brand mt-2 mt-lg-0" href="/" style="margin-right: 100px;">
                     <img src="/static/avatar.png" height="30" alt="MDB Logo" loading="lazy" />
                 </a>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item" style="align-self: center;">
-                        <i class="fas fa-home"></i>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" aria-current="page" href="/">Home</a>
-                    </li>
-
-                    <li class="nav-item" style="align-self: center; margin-left: 8em;">
-                        <i class="fas fa-edit"></i>
+                    <li class="nav-item active" style="margin-right: 100px;">
+                        <a class="nav-link" aria-current="page" href="/">
+                            <i class="fas fa-home me-2"></i>
+                            Home
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('front.post_list')}}">Posts</a>
+                        <a class="nav-link" href="{{url_for('front.post_list')}}">
+                            <i class="fas fa-edit me-2"></i>
+                            Posts
+                        </a>
                     </li>
                 </ul>
-                <ul class="navbar-nav me-5 mb-2 mb-lg-0">
-                    <li class="nav-item" style="align-self: center;">
-                        <i class="fas fa-user-circle"></i>
-                    </li>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     {% if g.front_user %}
-                    <span id="login-tag" data-is-login='1' style="display: none;"></span>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">{{ g.front_user.username }}</a>
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-user-circle me-2"></i>
+                            {{ g.front_user.username }}
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('front.logout') }}">Logout</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('front.signin')}}">Login</a>
+                        <a class="nav-link" href="{{url_for('front.signin')}}">
+                            <i class="fas fa-user-circle me-2"></i>
+                            Login
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{url_for('front.signup')}}">Register</a>
@@ -141,7 +144,8 @@
     </div>
 
     <div class="container border-top border-2" style="margin-top: 20px; padding-left: 0;">
-        <h3 style="margin-top: 10px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">Other Comments</h3>
+        <h3 style="margin-top: 10px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">Other
+            Comments</h3>
     </div>
 
     <ul class="container" style="padding: 0; margin-top: 5px; margin-bottom: 150px;">
@@ -178,6 +182,8 @@
             width: 40%;
         }
     </style>
+    <!-- MDB -->
+    <script type="text/javascript" src="/static/front/js/mdb.min.js"></script>
 </body>
 
 </html>
