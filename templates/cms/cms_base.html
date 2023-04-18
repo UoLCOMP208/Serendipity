@@ -66,7 +66,7 @@
                     <li class="board-manage"><a href="{{ url_for('cms.boards') }}">Board Management</a></li>
                     {% endif %}
 
-                    {% if cms_user.has_permission(CMSPermission.FRONTUSER) %}
+                    <!-- {% if cms_user.has_permission(CMSPermission.FRONTUSER) %}
                         <li class="nav-group user-manage"><a href="{{ url_for('cms.fusers') }}">Front-end User Management</a></li>
                     {% endif %}
 
@@ -76,7 +76,7 @@
 
                     {% if cms_user.is_developer %}
                         <li class="cmsrole-manage"><a href="{{ url_for('cms.croles') }}">CMS Group Management</a></li>
-                    {% endif %}
+                    {% endif %} -->
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
