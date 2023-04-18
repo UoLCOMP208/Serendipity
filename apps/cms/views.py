@@ -94,6 +94,22 @@ def uhpost():
     db.session.commit()
     return restful.success()
 
+@bp.route('/dpost/', methods=['POST'])
+@login_required
+@permission_required(CMSPersmission.POSTER)
+def dpost():
+    post_id = request.form.get("post_id")
+    if not post_id:
+        return restful.params_error('Please enter post_id!')
+
+    post = PostModel.query.get(post_id)
+    if not post:
+        return restful.params_error(message='No such post!')
+
+    db.session.delete(post)
+    db.session.commit()
+    return restful.success()
+
 
 @bp.route('/comments/')
 @login_required
