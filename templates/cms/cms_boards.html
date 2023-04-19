@@ -18,7 +18,6 @@
     <thead>
         <tr>
             <th>Board Name</th>
-            <th>Number of posts</th>
             <th>Creation time</th>
             <th>Operation</th>
         </tr>
@@ -27,7 +26,6 @@
         {% for board in boards %}
         <tr data-name="{{ board.name }}" data-id="{{ board.id }}">
             <td>{{ board.name }}</td>
-            <td>0</td>
             <td>{{ board.create_time }}</td>
             <td>
                 <button class="btn btn-default btn-sm edit-board-btn">Edit</button>
