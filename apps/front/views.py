@@ -1,4 +1,4 @@
-from flask import Blueprint, views, render_template, request, session, url_for, redirect, g, abort
+from flask import Blueprint, jsonify, views, render_template, request, session, url_for, redirect, g, abort
 from exts import mail, db
 from flask_mail import Message
 from utils import restful, zlcache, safeutils
@@ -152,6 +152,14 @@ class SignupView(views.MethodView):
             # print(form.get_error())
             return restful.params_error(message=form.get_error())
 
+@bp.route('/check_email', methods=['GET'])
+def check_email():
+    email = request.args.get('email')
+    if email:
+        user = FrontUser.query.filter_by(email=email).first()
+        if user:
+            return jsonify({'result': 'exists'})
+    return jsonify({'result': 'not_exists'})
 
 @bp.route('/email/')
 def send_email():

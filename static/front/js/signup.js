@@ -29,6 +29,12 @@ $(function () {
     });
 });
 
+function check_email_exists(email, callback) {
+    $.get('/check_email', {'email': email}, function(data) {
+        callback(data['result'] === 'exists');
+    });
+}
+
 $(function(){
     $("#submit-btn").click(function(event){
         event.preventDefault();
@@ -46,6 +52,13 @@ $(function(){
             zlalert.alertInfoToast('Please enter your email address!');
             return;
         }
+
+        check_email_exists(email, function(email_exists) {
+            if (email_exists) {
+                zlalert.alertInfoToast('This email address is already registered!');
+                return;
+            }
+        });
 
         zlajax.post({
             'url': '/signup/',
@@ -73,3 +86,5 @@ $(function(){
         });
     });
 });
+
+
