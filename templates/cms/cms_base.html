@@ -4,9 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %} {% endblock %}</title>
-    <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <!-- <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
     <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/static/cms/css/base.css">
     <link rel="stylesheet" href="/static/common/sweetalert/sweetalert.css">
     <script src="/static/common/sweetalert/sweetalert.min.js"></script>
@@ -55,7 +58,7 @@
 
                     {% set cms_user = g.cms_user %}
                     {% if cms_user.has_permission(CMSPermission.POSTER) %}
-                        <li class="nav-group post-manage"><a href="{{ url_for('cms.posts') }}">Post Management</a></li>
+                    <li class="nav-group post-manage"><a href="{{ url_for('cms.posts') }}">Post Management</a></li>
                     {% endif %}
 
                     <!-- {% if cms_user.has_permission(CMSPermission.BOARDER) %}
